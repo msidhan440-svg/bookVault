@@ -25,6 +25,9 @@ mongoose.connect(process.env.MONGO_URI ||
      app.use(session({secret:"key",resave:false,saveUninitialized:false,cookie:{maxAge:1000 * 60 *60 * 24 * 7}}))
     app.use('/api',userRouter)
     app.use('/admin',adminRoter)
+    app.get('/',(req,res)=>{
+        res.send('Server is running')
+    })
 const PORT=process.env.PORT ||5000;
 app.listen(PORT,()=>{
     console.log(`Serve running on ${PORT}`)
