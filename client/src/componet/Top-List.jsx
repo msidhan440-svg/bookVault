@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import './Top-List.css';
 import profile from '../assets/profile.png';
 import second from '../assets/second.png';
-import first from '../assets/first.png';
+import first from '../assets/First.png';
 import third from '../assets/Third.png';
 import addImage from '../assets/imageTage.png';
 import editImage from '../assets/Edit-Image.png';
