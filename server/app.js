@@ -15,7 +15,7 @@ app.use(express.json())
 app.use('/uploads',express.static(path.join(__dirname,'uploads')))
 app.use('/profile-image',express.static(path.join(__dirname,'profile-image')))
 mongoose.connect(process.env.MONGO_URI ||
-    'mongodb+srv://msidhan440_db_user:Sidhan1221@bookvault.aenw8gz.mongodb.net/?fullstac?appName=bookVault/')
+    'mongodb+srv://msidhan440_db_user:Sidhan1221@bookvault.aenw8gz.mongodb.net/bookVault?appName=bookVault/')
     .then(()=>{
         console.log("Data Base connected")
     }).catch((err)=>{
