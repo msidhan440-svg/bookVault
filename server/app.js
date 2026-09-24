@@ -22,7 +22,11 @@ mongoose.connect(process.env.MONGO_URI ||
         console.log("Data Base connection err",err)
     })
     
-     app.use(session({secret:"key",resave:false,saveUninitialized:false,cookie:{maxAge:1000 * 60 *60 * 24 * 7}}))
+     app.use(session({secret:"key",resave:false,saveUninitialized:false,cookie:{maxAge:1000 * 60 *60 * 24 * 7,
+     sameSite:'none',
+     secure:true
+
+     }}))
     app.use('/api',userRouter)
     app.use('/admin',adminRoter)
     app.get('/',(req,res)=>{
