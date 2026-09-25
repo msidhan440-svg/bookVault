@@ -69,8 +69,7 @@ useEffect(()=>{
       <div className="modern-form-card">
         {/* Form Header with Book Logo */}
         <div className="form-header">
-          <div className="form-icon-badge">
-            <h2 className='form-title'>Book Registration</h2>
+          <div className="form-icon-badge" title="Book Registration">
             {/* Attractive Book Logo SVG */}
             <svg
               width="28"
