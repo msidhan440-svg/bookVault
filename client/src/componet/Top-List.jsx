@@ -267,13 +267,13 @@ function TopList() {
                                 }
                             });
                         }
-
-                        const currentImgSrc = user.previewUrl
-                            ? user.previewUrl 
-                            : user.profileImage
-                            ? `http://localhost:5000/uploads/${user.profileImage}`
-                            : profile;
-
+                         
+                       const currentImgSrc = user.previewUrl || 
+                        (user.profileImage 
+                          ? (user.profileImage.startsWith('http') 
+                            ? user.profileImage 
+                         : `https://res.cloudinary.com/viuldfvw/image/upload/${user.profileImage}`) 
+                          : profile);
                         return (
                             <div className="card" key={user._id}>
                                 {rangTag && <span className="rang-tag">{rangTag}</span>}
@@ -368,7 +368,8 @@ function TopList() {
                         </div>
 
                         {/* Quick Stats Ribbon */}
-                        <div className="modal-stats-ribbon">
+
+                       <div className="modal-stats-ribbon">
                             <div className="stat-pill">
                                 <span className="stat-num">{viewDetails ? viewDetails.length : 0}</span>
                                 <span className="stat-text">Total Books</span>

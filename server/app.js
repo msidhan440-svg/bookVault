@@ -16,7 +16,7 @@ app.use(express.json())
 app.use('/uploads',express.static(path.join(__dirname,'uploads')))
 app.use('/profile-image',express.static(path.join(__dirname,'profile-image')))
 mongoose.connect(process.env.MONGO_URI ||
-    'mongodb+srv://msidhan440_db_user:Sidhan1221@bookvault.aenw8gz.mongodb.net/bookVault?appName=bookVault/')
+'mongodb+srv://msidhan440_db_user:Sidhan1221@bookvault.aenw8gz.mongodb.net/bookVault?appName=bookVault/' )
     .then(()=>{
         console.log("Data Base connected")
     }).catch((err)=>{
@@ -24,9 +24,8 @@ mongoose.connect(process.env.MONGO_URI ||
     })
     
      app.use(session({secret:"key",resave:false,saveUninitialized:false,cookie:{maxAge:1000 * 60 *60 * 24 * 7,
-     sameSite:'none',
-     secure:true
-
+      sameSite:'none',
+      secure:true
      }}))
     app.use('/api',userRouter)
     app.use('/admin',adminRoter)

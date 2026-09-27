@@ -6,18 +6,24 @@ const adminHelpers = require('../connect/admin-helpers')
 const route =require('../routes/users')
 const multer = require('multer')
 const path = require('path');
+const cloudinary = require('cloudinary').v2
+const {CloudinaryStorage} = require('multer-storage-cloudinary')
 const { profileEnd } = require('console');
 const { imageDelete } = require('../connect/user-helper');
-     const storageImage=multer.diskStorage({
-        destination:(req,file,cb)=>{
-            cb(null,'profile-image/')
-        },
-        filename:(req,file,cb)=>{
-            cb(null,Date.now()+path.extname(file.originalname))
-        }
-
+   
+     cloudinary.config({
+      cloud_name:'viuldfvw',
+      api_key:'958278575139294',
+      api_secret:'4XW70TQDdFj2XzLhJu5NJf3dO9o'
+     });
+     const storageImg = new CloudinaryStorage({
+      cloudinary:cloudinary,
+     params:{
+      folder:'profile-image',
+      allowed_formats:['jpg','png','jpeg']
+     }
      })
-     const profile = multer({storage:storageImage})
+     const upload = multer({storage:storageImg})
 router.post('/signing',async(req,res)=>{
     try{
        
@@ -55,8 +61,10 @@ router.post('/login',async(req,res)=>{
   }
  
 } )
-router.post('/upload-profile-img',profile.single('image'),async(req,res)=>{
+router.post('/upload-profile-img',upload.single('image'),async(req,res)=>{
   try{
+    console.log("iamage",req.file)
+    console.log("body",req.body)
      const profileId = req.body.profileId;
      const imagePath = req.file ? req.file.path:null
      if(!imagePath){
@@ -67,6 +75,7 @@ router.post('/upload-profile-img',profile.single('image'),async(req,res)=>{
      res.json({status:true,response})
   }catch(err){
    res.status(500).json({error:err.message})
+   console.log("iamage",req.file)
   }
 })
 router.get('/admin-image',async(req,res)=>{

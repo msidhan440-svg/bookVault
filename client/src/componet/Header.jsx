@@ -89,7 +89,7 @@ function Header() {
        })
        
     }catch(err){
-    console.log("Imge fetch is working")
+    console.log("Imge fetch is not working")
     }
   } 
   useEffect(()=>{
@@ -267,7 +267,7 @@ function Header() {
             {/* Unobscured Profile Avatar Image */}
             <img
               className="profile-avatar-img"
-              src={imageId ? `http://localhost:5000/${imageId}` : Profile}
+              src={imageId ? imageId : Profile}
               alt="Profile"
             />
 

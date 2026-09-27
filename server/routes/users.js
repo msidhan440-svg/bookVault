@@ -6,6 +6,8 @@ const app = express();
 const {User,TopCollection,Admin}=require('../cofig/collection')
 const multer = require('multer')
 const path =require('path')
+const cloudinary = require('cloudinary').v2
+const { CloudinaryStorage} = require('multer-storage-cloudinary')
 const {ObjectId} = require('mongodb');
 const { profile } = require('console');
 const verfy = (req,res,next)=>{
@@ -15,18 +17,22 @@ const verfy = (req,res,next)=>{
         res.status(200).json({loginStatus:false})
        
     }
-    
+      
 }
-const storage=multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null,'uploads/')
-    },
-    filename:(req,file,cb)=>{
-        cb(null,Date.now()+path.extname(file.originalname))
-    }
-})
-const upload= multer({storage:storage})
-    
+// 
+     cloudinary.config({
+        cloud_name:'viuldfvw',
+      api_key:'958278575139294',
+      api_secret:'4XW70TQDdFj2XzLhJu5NJf3dO9o'
+     })
+     const topImage = new CloudinaryStorage({
+         cloudinary:cloudinary,
+         params:{
+            folder:'top-list-image',
+            allowed:['jpg','png','jpeg']
+         }  
+     })
+     const upload = multer({storage:topImage})
     router.post('/user',verfy,async (req,res)=>{
         try{
            const userId = req.session.userId;
